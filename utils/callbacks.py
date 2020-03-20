@@ -57,4 +57,4 @@ def checkpoints(folder):
     return [checkpoint1,checkpoint2]
 
 def return_default_callbacks_list(folder,print_every_n_batches,initial_epoch,vae,initial_lr,decay_rate,step_size=1):
-    return step_decay_schedule(initial_lr,decay_rate,step_size)+checkpoints(folder)+[custom_callback(folder,print_every_n_batches,initial_epoch,vae)]
+    return step_decay_schedule(initial_lr,decay_rate,step_size)+checkpoints(folder)+[Custom_callback(folder,print_every_n_batches,initial_epoch,vae)]
