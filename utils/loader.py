@@ -29,6 +29,7 @@ import os
 
 def load_celeb_generator(folder_name,image_size,batch_size):
     data_folder = os.path.join('./data',folder_name)   ## For unix use / for windows use \
+    print(os.getcwd()) #Temporary statement for debugging
     if not os.path.exists(data_folder):
         print("Error")
         return
