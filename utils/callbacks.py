@@ -50,7 +50,7 @@ from keras.callbacks import ModelCheckpoint
 def checkpoints(folder):
     if not os.path.exists(folder):
         os.mkdir(folder)
-    checkpoint_loc1 = os.path.join(folder,'/weights/weights-{epoch:03d}-{loss:.2f}.hd5')
+    checkpoint_loc1 = os.path.join(folder,'weights/weights-{epoch:03d}-{loss:.2f}.hd5')
     checkpoint_best = os.path.join(folder,'weights/weights.h5')
     checkpoint1 = ModelCheckpoint(checkpoint_loc1,save_weights_only=True,verbose = 1)
     checkpoint2 = ModelCheckpoint(checkpoint_best,monitor='loss',save_best_only=True,save_weights_only = True,verbose = 1)

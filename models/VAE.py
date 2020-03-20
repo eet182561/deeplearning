@@ -31,7 +31,7 @@ import os
 class VAE:
     def __init__(self,image_size,encoder_filters,encoder_kernel_size,
                  encoder_kernel_strides,decoder_filters,decoder_kernel_size,
-                 decoder_kernel_strides,zdim,use_batchnorm=True,
+                 decoder_kernel_strides,zdim,use_batchnorm=False,
                  bn_momentum=None,use_dropout=False,dropout_rate=None):
         
         self.image_size = image_size
@@ -158,8 +158,12 @@ class VAE:
     def train_with_generator(self,data_flow, epochs, steps_per_epoch, run_folder, print_every_n_batches = 100, initial_epoch = 0, lr_decay = 1):
         checkpoints_list = checkpoints(run_folder)
         lrschd = step_decay_schedule(self.lr,lr_decay,steps_per_epoch)
-        cblist = checkpoints_list.append(lrschd).append(Custom_callback(run_folder,print_every_n_batches,initial_epoch,self))
-        self.model.save_weights(os.path.join(run_folder, 'weights/weights.h5'))
+        cblist = checkpoints_list + lrschd + [Custom_callback(run_folder,print_every_n_batches,initial_epoch,self)]
+        self.save(run_folder)
+        if not os.path.exists(os.path.join(run_folder,'weights')):
+            os.mkdir(os.path.join(run_folder,'weights'))
+        self.model.save_weights(os.path.join(run_folder, 'weights\weights.h5'))
+        
         self.model.fit_generator(
             data_flow
             , shuffle = True
@@ -171,11 +175,13 @@ class VAE:
         
     def save(self, folder):
 
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-            os.makedirs(os.path.join(folder, 'viz'))
-            os.makedirs(os.path.join(folder, 'weights'))
-            os.makedirs(os.path.join(folder, 'images'))
+        if not os.path.exists(os.path.join(folder,'images')):
+            print('making folders')
+            os.makedirs(folder,exist_ok=True)
+            os.makedirs(os.path.join(folder, 'viz'),exist_ok=True)
+            os.makedirs(os.path.join(folder, 'weights'),exist_ok=True)
+            os.makedirs(os.path.join(folder, 'images'),exist_ok=True)
+            print('folder made')
             
         with open(os.path.join(folder, 'params.pkl'), 'wb') as f:
             pickle.dump([
