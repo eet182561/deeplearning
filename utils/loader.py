@@ -12,7 +12,7 @@ Data Loader file :currently for celebA dataset
 celeb a dataset is huge so we will load it using a generator
 '''
 from keras.preprocessing.image import ImageDataGenerator
-
+import numpy as np
 
 '''
 keras.preprocessing.image.ImageDataGenerator(featurewise_center=False, 
@@ -54,7 +54,7 @@ def load_mnist():
     x_test = x_test.astype('float32')/255.0
     y_train = to_categorical(y_train)
     y_test = to_categorical(y_test)
-    return (x_train,y_train),(x_test,y_test)
+    return (x_train[:,:,:,np.newaxis],y_train),(x_test[:,:,:,np.newaxis],y_test)
 
 def load_mnist_generator():
     #returns iterators to be used with generators
