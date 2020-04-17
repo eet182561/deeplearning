@@ -4,3 +4,4 @@
 __pucache__
 data/*
 !data/.gitkeep
+run

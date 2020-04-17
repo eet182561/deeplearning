@@ -28,6 +28,7 @@ class Custom_callback(Callback):
                 plt.imsave(filepath, reconst, cmap='gray_r')
             else:
                 plt.imsave(filepath, reconst)
+
     def on_epoch_begin(self,epoch,logs={}):
         self.epoch=epoch+1
 
@@ -51,8 +52,8 @@ def checkpoints(folder):
     if not os.path.exists(folder):
         os.mkdir(folder)
     checkpoint_loc1 = os.path.join(folder,'weights/weights-{epoch:03d}-{loss:.2f}.hd5') ## For unix use / for windows use \
-    checkpoint_best = os.path.join(folder,'weights/weights.h5') ## For unix use / for windows use \
-    checkpoint1 = ModelCheckpoint(checkpoint_loc1,save_weights_only=True,verbose = 1)
+    checkpoint_best = os.path.join(folder,'weights/best_weights_at_epoch_{epoch:03d}_{loss:.2f}.hd5') ## For unix use / for windows use \
+    checkpoint1 = ModelCheckpoint(checkpoint_loc1,verbose = 1)
     checkpoint2 = ModelCheckpoint(checkpoint_best,monitor='loss',save_best_only=True,save_weights_only = True,verbose = 1)
     return [checkpoint1,checkpoint2]
 
