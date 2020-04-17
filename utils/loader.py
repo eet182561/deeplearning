@@ -28,7 +28,7 @@ validation_split=0.0, interpolation_order=1, dtype='float32')
 import os
 
 def load_celeb_generator(folder_name,image_size,batch_size):
-    data_folder = os.path.join('folder_name')   ## For unix use / for windows use \
+    data_folder = os.path.join(folder_name)   ## For unix use / for windows use \
     if not os.path.exists(data_folder):
         print(data_folder,"1 Error")
         return
