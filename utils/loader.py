@@ -30,7 +30,7 @@ import os
 def load_celeb_generator(folder_name,image_size,batch_size):
     data_folder = os.path.join('folder_name')   ## For unix use / for windows use \
     if not os.path.exists(data_folder):
-        print("Error")
+        print(data_folder," Error")
         return
     print("Path exists. Continuing")
     data_gen = ImageDataGenerator(preprocessing_function=lambda x:(x.astype('float32')-127.5)/127.5 )
@@ -75,4 +75,3 @@ def load_mnist_generator():
     train_iter = datagen.flow(x_train,to_categorical(y_train),32,shuffle = True)
     test_iter = datagen.flow(x_test,to_categorical(y_test),batch_size=32,shuffle=True)
     return train_iter,test_iter
-    
