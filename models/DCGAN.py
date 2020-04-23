@@ -1,4 +1,4 @@
-from keras.layers import Input,Conv2D,Dense,BatchNormalisation,Activation,Dropout,Flatten,Model,UpSampling2D,Conv2DTranspose,Reshape
+from keras.layers import Input,Conv2D,Dense,Activation,Dropout,Flatten,Model,UpSampling2D,Conv2DTranspose,Reshape,BatchNormalization
 from keras.optimizers import RMSprop,Adam
 from keras.losses import BinaryCrossentropy
 import numpy as np
