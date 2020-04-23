@@ -67,7 +67,7 @@ class GAN:
     def _build_discriminator(self):
         # Discriminator
         discriminator_input = Input(input_shape=self.discriminator_input,name = 'discriminator_input')
-        x = self.decoder_input
+        x = discriminator_input
         
         for i in len(self.discriminator_conv_filter):
             conv = Conv2D(filters = self.discriminator_conv_filter[i],
