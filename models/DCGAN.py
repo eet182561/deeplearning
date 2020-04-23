@@ -107,13 +107,24 @@ class GAN:
         if self.genrator_dropout_rate:
             x = Dropout(rate = self.genrator_dropout_rate)(x)
         for i in range(len(self.generator_conv_filter)):
-            x = UpSampling2D()(x)
-            x = Conv2D(
-                filters=self.generator_conv_filter[i],
-                kernel_size = self.generator_conv_kernel_size[i],
-                padding = 'same',
-                name = 'generator_cov_'+str(i)
-                )(x)
+            if self.generator_upsample[i]==2
+                x = UpSampling2D()(x)
+                x = Conv2D(
+                    filters=self.generator_conv_filter[i],
+                    kernel_size = self.generator_conv_kernel_size[i],
+                    padding = 'same',
+                    name = 'generator_cov_'+str(i)
+                    )(x)
+            else:
+                x = Conv2DTranspose(
+                    filters = self.generator_conv_filters[i]
+                    , kernel_size = self.generator_conv_kernel_size[i]
+                    , padding = 'same'
+                    , strides = self.generator_conv_strides[i]
+                    , name = 'generator_conv_' + str(i)
+                    )(x)
+                )
+                
             if i<len(self.generator_conv_filter)-1:
                 if self.generator_batch_norm_momentum:
                     x = BatchNormalisation(momentum = self.generator_batch_norm_momentum)(x)
