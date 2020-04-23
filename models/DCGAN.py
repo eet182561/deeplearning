@@ -171,7 +171,7 @@ class GAN:
         if using_generator:
             true_images = next(x_train) #next return (x,y); 0 for x
             if true_images.shape[0] != batch_size:
-                true_images = next(x_train)[0]
+                true_images = next(x_train)
         else:
             idx = np.random.randint(0,x_train.shape[0],size = batch_size)
             true_images = x_train[idx]
