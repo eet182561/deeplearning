@@ -66,7 +66,7 @@ class GAN:
 
     def _build_discriminator(self):
         # Discriminator
-        discriminator_input = Input(input_shape=self.decoder_input,name = 'discriminator_input')
+        discriminator_input = Input(input_shape=self.discriminator_input,name = 'discriminator_input')
         x = self.decoder_input
         
         for i in len(self.discriminator_conv_filter):
@@ -124,7 +124,7 @@ class GAN:
                     , name = 'generator_conv_' + str(i)
                     )(x)
                 )
-                
+
             if i<len(self.generator_conv_filter)-1:
                 if self.generator_batch_norm_momentum:
                     x = BatchNormalisation(momentum = self.generator_batch_norm_momentum)(x)
