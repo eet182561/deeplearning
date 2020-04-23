@@ -215,5 +215,4 @@ class GAN:
                     self.model.save_weights(os.path.join(run_folder, 'weights/weights_best_at_epoch_{self.epoch:%5d}.h5'))
                     if g_best is not None:
                         os.remove(os.path.join(run_folder, 'weights/weights_best_at_epoch_{g_best:%5d}.h5'))
-                    g_best = self.epoch
-                self.save_model(run_folder) 
+                    g_best = self.epoch 
